@@ -38,6 +38,7 @@
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <h1>EZISAFER - LETS GET SOME PEOPLE ON PLATFORM</h1>
+                <h2>OUR LANDING PAGE GOES HERE</h2>
                 <h4><a href="{{url('/create/agency')}}">click here to create agency</a><h4>
             </div>
         </div>
