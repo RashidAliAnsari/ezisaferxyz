@@ -36,7 +36,7 @@ class CreateAgencyRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'domain' => $this->domain . '.' . request()->getHost(),
+            'domain' => ($this->domain) ? $this->domain . '.' . request()->getHost() : '',
         ]);
     }
     
