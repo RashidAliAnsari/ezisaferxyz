@@ -37,6 +37,8 @@ class TestController extends Controller
     }
 
     public function dbSeed(){
+        Role::truncate();
+        User::where('email', 'super.admin@ezisafer.xyz')->delete();
         \Artisan::call('db:seed', [
             '--force' => true
         ]);
