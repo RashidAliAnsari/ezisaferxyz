@@ -15,13 +15,22 @@
                     @csrf
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <input name="email" type="email" id="form3Example3" class="form-control form-control-lg"
+                        @if(session('error'))
+                        <p class="help-block" style="color: red;">{{session('error')}}</p>
+                        @endif
+                        @error('email')
+                        <p class="help-block" style="color: red;">{{$message}}</p>
+                        @enderror
+                        <input name="email" type="text" value="{{old('email')}}" id="form3Example3" class="form-control form-control-lg"
                         placeholder="Enter a valid email address" />
                         <label class="form-label" for="form3Example3">Email address</label>
                     </div>
                     
                     <!-- Password input -->
                     <div class="form-outline mb-3">
+                        @error('password')
+                        <p class="help-block" style="color: red;">{{$message}}</p>
+                        @enderror
                         <input name="password" type="password" id="form3Example4" class="form-control form-control-lg"
                         placeholder="Enter password" />
                         <label class="form-label" for="form3Example4">Password</label>

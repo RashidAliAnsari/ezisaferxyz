@@ -14,15 +14,9 @@ class LoginController extends Controller
 
     use SweetAlert;
     // for both tenant and customer
-    public function login(Request $request){
-        
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-        // dd($credentials);
-        if (Auth::attempt($credentials)) {
-        // if (Auth::attempt($request->all())) {
+    public function login(LoginRequest $request){
+        // dd('reach');
+        if (Auth::attempt($request->only('email','password'))) {
             $this->realRashidToast('You are logged in successfully', 'success');
             if (Auth::user()->hasRole('agency')) {
                 return redirect()->route('home');
@@ -30,10 +24,14 @@ class LoginController extends Controller
             if(Auth::user()->hasRole('customer')) {
                 return redirect()->route('dashboard');
             }
+            if(Auth::user()->hasRole('super-admin')) {
+                dd('right here');
+                return redirect()->route('admin.home');
+            }
         }
 
-        $this->realRashidToast('Login details are not valid', 'error');
-        return back();
+        return back()->with('error','The provided credentials do not match our records.');
+
 
     }
 

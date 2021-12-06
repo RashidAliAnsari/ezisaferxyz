@@ -35,15 +35,10 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'Email is required.',
-            'password.required' => 'Password is required.',
+            'email.required' => 'The Email is required.',
+            'password.required' => 'The Password is required.',
         ];
     }
 
-    protected function failedValidation(Validator $validator) {
-        // Perform your response 
-        // by default it will throw ValidationException.
-        $this->realRashidToast('Login details are not valid', 'error');
-    }
 
 }

@@ -34,10 +34,10 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Name is required.',
-            'phone_no.required' => 'Phone no is required.',
-            'email.required' => 'Email is required.',
-            'password.required' => 'Password is required.',
+            'name.required' => 'The Name is required.',
+            'phone_no.required' => 'The Phone no is required.',
+            'email.required' => 'The Email is required.',
+            'password.required' => 'The Password is required.',
         ];
     }
 

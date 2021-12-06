@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Tenant;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class TestController extends Controller
 {
@@ -31,6 +34,24 @@ class TestController extends Controller
             '--force' => true
         ]);
         return 'migrate fresh done!';
+    }
+
+    public function dbSeed(){
+        \Artisan::call('db:seed', [
+            '--force' => true
+        ]);
+
+        $superAdmin = User::create([
+            'name' => 'Mohammad Asri',
+            'email' => 'super.admin@ezisafer.xyz',
+            'password' => Hash::make('ezisaferInProgress'),
+            'verification_code' => Str::random(30)
+        ]);
+
+        $roleId = Role::where('slug', 'super-admin')->pluck('id');
+        $superAdmin->roles()->attach($roleId);
+
+        return 'Database seeder done!';
     }
 
     public function createTenant()
