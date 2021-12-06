@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\App;
 use Stancl\Tenancy\Database\Models\Domain;
 use Stancl\Tenancy\Database\Models\Tenant;
 
-$centralDomain = (App::environment('local')) ? 'ezisafer.test' : 'ezisafer.xyz';
+$centralDomain = (app()->environment('local')) ? 'ezisafer.test' : 'ezisafer.xyz';
 
 return [
     'tenant_model' => \App\Models\Tenant::class,
