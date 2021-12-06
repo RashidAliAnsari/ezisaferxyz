@@ -5,6 +5,8 @@ declare(strict_types=1);
 use Stancl\Tenancy\Database\Models\Domain;
 use Stancl\Tenancy\Database\Models\Tenant;
 
+$centralDomain = (App::environment('local')) ? 'ezisafer.test' : 'ezisafer.xyz';
+
 return [
     'tenant_model' => \App\Models\Tenant::class,
     'id_generator' => Stancl\Tenancy\UUIDGenerator::class,
@@ -19,8 +21,9 @@ return [
     'central_domains' => [
         '127.0.0.1',
         'localhost',
-        'ezisafer.test',
-        'ezisafer.xyz',
+        $centralDomain,
+        // 'ezisafer.test',
+        // 'ezisafer.xyz',
     ],
 
     /**

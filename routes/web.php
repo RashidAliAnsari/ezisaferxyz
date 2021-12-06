@@ -35,7 +35,7 @@ Route::post('/create/agency', 'central\createAgency@store');
 
 //Backend routes for super-admin
 Route::group([
-    'middleware' => ['auth', 'isVerify', 'role:super-admin'],
+    // 'middleware' => ['auth', 'isVerify', 'role:super-admin'],
     'prefix' => 'admin',
     'as' => 'admin.',
 ], function(){
