@@ -8,6 +8,7 @@ use App\Models\Tenant;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class TestController extends Controller
 {
@@ -37,8 +38,12 @@ class TestController extends Controller
     }
 
     public function dbSeed(){
+        Schema::disableForeignKeyConstraints();
         Role::truncate();
+        Schema::enableForeignKeyConstraints();
+
         User::where('email', 'super.admin@ezisafer.xyz')->delete();
+        
         \Artisan::call('db:seed', [
             '--force' => true
         ]);
