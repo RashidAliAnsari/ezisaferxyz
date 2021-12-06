@@ -12,7 +12,6 @@ class HomeController extends Controller
 {
     
     public function home(){
-        // dd('here');
         return view('central.backend.home');
     }
 
