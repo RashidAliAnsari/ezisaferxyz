@@ -48,3 +48,12 @@ Route::group([
     Route::get('/home', $namespace.'\HomeController@home')->name('home');
 });
 
+
+
+// common routes with tenant
+Route::middleware(['auth', 'isVerify'])->group(function(){
+    
+    Route::get('/switch-screen-mode/{is_dark_mode}', 'CommonController@screenMode')->name('screenMode');
+    
+});
+

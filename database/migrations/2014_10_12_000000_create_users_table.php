@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_verified')->default(1);
             $table->string('password');
             $table->rememberToken();
+            $table->boolean('is_dark_mode')->default(0);
             $table->timestamps();
         });
     }

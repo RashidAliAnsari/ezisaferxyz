@@ -12,14 +12,6 @@
 <link href="{{URL::asset('assets/css/skins.css')}}" rel="stylesheet" />
 <!-- Animate css -->
 <link href="{{URL::asset('assets/css/animated.css')}}" rel="stylesheet" />
-<!--Sidemenu css -->
-@if (Auth::user()->hasRole('agency') || Auth::user()->hasRole('customer'))
-<link id="theme" href="{{URL::asset('assets/css/sidemenu.css')}}" rel="stylesheet">
-@endif
-<!-- P-scroll bar css-->
-<link href="{{URL::asset('assets/plugins/p-scrollbar/p-scrollbar.css')}}" rel="stylesheet" />
-<!-- Prism Css -->
-<link href="{{URL::asset('assets/plugins/prism/prism.css')}}" rel="stylesheet">
 <!---Icons css-->
 <link href="{{URL::asset('assets/plugins/web-fonts/icons.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/web-fonts/font-awesome/font-awesome.min.css')}}" rel="stylesheet">

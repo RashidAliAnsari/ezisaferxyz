@@ -28,8 +28,8 @@ class VerifyEmailController extends Controller
                 return redirect()->route('dashboard');
             }
         } else {
-            $this->realRashidToast('Your verification code is incorrect', 'error');
-            return back();
+            // $this->realRashidToast('Your verification code is incorrect', 'error');
+            return back()->with('error', 'Your verification code is incorrect');
         }
         
 
