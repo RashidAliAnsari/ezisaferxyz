@@ -22,9 +22,9 @@ return [
     'central_domains' => [
         // '127.0.0.1',
         // 'localhost',
-        $centralDomain,
+        // $centralDomain,
         // 'ezisafer.test',
-        // 'ezisafer.xyz',
+        'ezisafer.xyz',
     ],
 
     /**
