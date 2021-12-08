@@ -53,7 +53,7 @@ Route::group([
 // common routes with tenant
 Route::middleware(['auth', 'isVerify'])->group(function(){
     
-    Route::get('/switch-screen-mode/{is_dark_mode}', 'CommonController@screenMode')->name('screenMode');
+    Route::get('/switch-screen-mode/{is_dark_mode}', 'CommonController@screenMode')->name('admin.screenMode');
     
 });
 

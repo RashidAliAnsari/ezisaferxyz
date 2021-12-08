@@ -18,10 +18,10 @@
 									 <span class="nav-span">Mode <i class="fa fa-angle-down ml-1 fs-18"></i></span>
 								</a>
 								<div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow animated">
-									<a class="dropdown-item" href="{{route('screenMode',0)}}">
+									<a class="dropdown-item" href="{{route('admin.screenMode',0)}}">
 										Light
 									</a>
-									<a class="dropdown-item" href="{{route('screenMode',1)}}">
+									<a class="dropdown-item" href="{{route('admin.screenMode',1)}}">
 										Dark
 									</a>
 								</div>
