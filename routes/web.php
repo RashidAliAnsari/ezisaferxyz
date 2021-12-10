@@ -20,6 +20,7 @@ Route::get('/', function () {
 // test routes
 Route::group(['prefix' => 'test'], function(){
     Route::get('clearCache', 'TestController@clearCache');
+    Route::get('migrate', 'TestController@migrate');
     Route::get('migrateFresh', 'TestController@migrateFresh');
     Route::get('dbSeed', 'TestController@dbSeed');
     Route::get('createTenant', 'TestController@createTenant');
@@ -46,6 +47,10 @@ Route::group([
     Route::post('/logout', 'tenant\auth\LoginController@logout')->name('logout');
     
     Route::get('/home', $namespace.'\HomeController@home')->name('home');
+
+    Route::get('/agencies', $namespace.'\HomeController@showAllAgencies')->name('agencies.show');
+    Route::get('/agencies/{tenantId}/profile', $namespace.'\HomeController@AgencyProfile')->name('agency.profile');
+    Route::get('/agency/approve/{tenantId}/{status}', $namespace.'\HomeController@AgencyApprove')->name('agency.approve');
 });
 
 

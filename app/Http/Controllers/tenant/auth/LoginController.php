@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\tenant\auth;
 
 use App\Models\User;
-use App\Traits\SweetAlert;
+// use App\Traits\SweetAlert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,7 @@ use App\Http\Requests\tenant\LoginRequest;
 class LoginController extends Controller
 {
 
-    use SweetAlert;
+    // use SweetAlert;
     // for both tenant and customer
     public function login(LoginRequest $request){
         // dd('reach');

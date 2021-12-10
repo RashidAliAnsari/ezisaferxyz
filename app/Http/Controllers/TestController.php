@@ -28,6 +28,17 @@ class TestController extends Controller
         return 'clear and cached!';
     }
 
+    public function migrate()
+    {
+        \Artisan::call('migrate', [
+            '--force' => true
+        ]);
+        \Artisan::call('tenants:migrate', [
+            '--force' => true
+        ]);
+        return 'central & tenant migrate done!';
+    }
+
     public function migrateFresh()
     {
         // \Artisan::call('migrate:fresh');

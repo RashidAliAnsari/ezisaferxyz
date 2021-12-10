@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->boolean('is_dark_mode')->default(0);
+            $table->integer('is_approved')->default(2);  // 2->pending || 1->approved || 0->declined
             $table->timestamps();
         });
     }
