@@ -73,7 +73,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <button type="submit" class="btn  btn-lg btn-primary btn-block px-4"><i class="fe fe-arrow-right"></i> Create a new account</button>
+                                                        <button type="submit" class="btn  btn-lg btn-primary btn-block px-4"><i class="fe fe-arrow-right"></i>{{__('register.button.text')}}</button>
                                                     </div>
                                                     
                                                 </div>

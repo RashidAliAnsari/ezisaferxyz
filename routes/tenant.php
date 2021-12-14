@@ -46,7 +46,7 @@ Route::middleware([
                 
                 Route::post('/logout', $namespaceTenant.'\auth\LoginController@logout')->name('logout');
                 Route::post('/register', $namespaceCustomer.'\auth\RegisterController@register')->name('register.customer');
-
+                
                 // forget password for customer & Agency
                 Route::get('forget-password', $namespaceTenant. '\auth\ForgotPasswordController@showForgetPasswordForm')->name('forget.password.get');
                 Route::post('forget-password', $namespaceTenant. '\auth\ForgotPasswordController@submitForgetPasswordForm')->name('forget.password.post'); 
@@ -54,35 +54,42 @@ Route::middleware([
                 Route::post('reset-password', $namespaceTenant. '\auth\ForgotPasswordController@submitResetPasswordForm')->name('reset.password.post');
                 
                 // Agency After Logged in
-                Route::middleware(['auth', 'isVerify', 'role:agency', 'isApproved'])->group(function(){
+                // Route::middleware(['auth', 'isVerify', 'role:agency', 'isApproved'])->group(function(){
+                    
+                Route::group([
+                    'middleware' => ['auth', 'isVerify', 'role:agency', 'isApproved'],
+                    // 'prefix' => 'tenant',
+                    'as' => 'tenant.',
+                ], function(){
                     
                     $namespaceTenant = 'App\Http\Controllers\tenant';
                     $resources = 'tenant.backend';
                     
                     Route::view('/home', $resources.'.home')->name('home');
                     Route::view('/not-approved', $resources.'.not-approved')->name('not-approved')->withoutMiddleware(['isApproved']);
+                    Route::get('/profile', $namespaceTenant.'\ProfileController@index')->name('profile')->withoutMiddleware(['isApproved']);
                     
                     
                 });
-                
-                
-                // Customer After Logged in
-                Route::middleware(['auth', 'isVerify', 'role:customer'])->group(function(){
                     
-                    $namespaceCustomer = 'App\Http\Controllers\tenant\customer';
-                    $resources = 'tenant.customer';
                     
-                    Route::get('/dashboard', $namespaceCustomer.'\DashboardController@index')->name('dashboard');
+                    // Customer After Logged in
+                    Route::middleware(['auth', 'isVerify', 'role:customer'])->group(function(){
+                        
+                        $namespaceCustomer = 'App\Http\Controllers\tenant\customer';
+                        $resources = 'tenant.customer';
+                        
+                        Route::get('/dashboard', $namespaceCustomer.'\DashboardController@index')->name('dashboard');
+                    });
+                    
+                    
+                    // Common routes for Agency and customer after Logged in
+                    Route::middleware(['auth', 'isVerify'])->group(function(){
+                        
+                        Route::get('/switch-screen-mode/{is_dark_mode}', 'App\Http\Controllers\CommonController@screenMode')->name('screenMode');
+                        
+                    });
+                    
+                    
+                    
                 });
-                
-                
-                // Common routes for Agency and customer after Logged in
-                Route::middleware(['auth', 'isVerify'])->group(function(){
-                    
-                    Route::get('/switch-screen-mode/{is_dark_mode}', 'App\Http\Controllers\CommonController@screenMode')->name('screenMode');
-                    
-                });
-                
-                
-                
-            });

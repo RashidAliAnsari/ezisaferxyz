@@ -20,4 +20,7 @@
 <link href="{{URL::asset('assets/plugins/web-fonts/icons.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/web-fonts/font-awesome/font-awesome.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/web-fonts/plugin.css')}}" rel="stylesheet" />
+
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 @yield('css')

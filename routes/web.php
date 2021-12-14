@@ -51,6 +51,15 @@ Route::group([
     Route::get('/agencies', $namespace.'\HomeController@showAllAgencies')->name('agencies.show');
     Route::get('/agencies/{tenantId}/profile', $namespace.'\HomeController@AgencyProfile')->name('agency.profile');
     Route::get('/agency/approve/{tenantId}/{status}', $namespace.'\HomeController@AgencyApprove')->name('agency.approve');
+
+    // multilingual - translations
+    Route::get('languages', $namespace.'\HomeController@getAllLanguages')->name('languages');
+    Route::post('translations/update', $namespace.'\HomeController@transUpdate')->name('translation.update.json');
+    Route::post('translations/updateKey', $namespace.'\HomeController@transUpdateKey')->name('translation.update.json.key');
+    Route::delete('translations/destroy/{key}', $namespace.'\HomeController@destroyTranslation')->name('translations.destroy');
+    Route::post('translations/create', $namespace.'\HomeController@storeTranslation')->name('translations.create');
+
+
 });
 
 
@@ -59,6 +68,8 @@ Route::group([
 Route::middleware(['auth', 'isVerify'])->group(function(){
     
     Route::get('/switch-screen-mode/{is_dark_mode}', 'CommonController@screenMode')->name('admin.screenMode');
+
+    Route::get('lang/change', 'CommonController@changeLang')->name('changeLang')->withoutMiddleware(['auth', 'isVerify']);
     
 });
 

@@ -1,7 +1,7 @@
 <!--aside open-->
 				<div class="app-sidebar app-sidebar2">
 					<div class="app-sidebar__logo">
-						<a class="header-brand" href="{{route('home')}}">
+						<a class="header-brand" href="{{route('tenant.home')}}">
 							<img src="{{URL::asset('assets/images/brand/logo.png')}}" class="header-brand-img desktop-lgo" alt="Covido logo">
 							<img src="{{URL::asset('assets/images/brand/logo1.png')}}" class="header-brand-img dark-logo" alt="Covido logo">
 							<img src="{{URL::asset('assets/images/brand/favicon.png')}}" class="header-brand-img mobile-logo" alt="Covido logo">
@@ -22,22 +22,16 @@
 					</div>
 					<ul class="side-menu">
 						<li class="slide">
-							<a class="side-menu__item" href="{{ route('home')}}">
+							<a class="side-menu__item" href="{{ route('tenant.home')}}">
 							<svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
 							<span class="side-menu__label">Dashboard</span></a>
 						</li>
 						<li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
 							<svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
-							<span class="side-menu__label">Charts</span><i class="angle fa fa-angle-right"></i></a>
+							<span class="side-menu__label">Setting</span><i class="angle fa fa-angle-right"></i></a>
 							<ul class="slide-menu">
-								<li><a href="{{ url('/' . $page='chart-chartist') }}" class="slide-item">Chartjs Charts</a></li>
-								<li><a href="{{ url('/' . $page='chart-morris') }}" class="slide-item"> Morris Charts</a></li>
-								<li><a href="{{ url('/' . $page='chart-apex') }}" class="slide-item"> Apex Charts</a></li>
-								<li><a href="{{ url('/' . $page='chart-peity') }}" class="slide-item"> Pie Charts</a></li>
-								<li><a href="{{ url('/' . $page='chart-echart') }}" class="slide-item"> Echart Charts</a></li>
-								<li><a href="{{ url('/' . $page='chart-flot') }}" class="slide-item"> Flot Charts</a></li>
-								<li><a href="{{ url('/' . $page='chart-c3') }}" class="slide-item">C3 Charts</a></li>
+								<li><a href="{{route('tenant.profile')}}" class="slide-item">Profile</a></li>
 							</ul>
 						</li>
 					</ul>

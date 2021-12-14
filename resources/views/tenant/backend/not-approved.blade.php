@@ -35,6 +35,7 @@
                             Your current profile status is pending.Please wait for admin action.Thanks!
                         @endif
                     </h3>
+                    <p>Make sure you submit you <a href="{{route('tenant.profile')}}">Complete Profile</a></p>
                     {{-- <div class="text-muted"><i class="si si-arrow-up-circle text-danger"></i> <span class="">15%</span> Increase</div> --}}
                 </div>
             </div>

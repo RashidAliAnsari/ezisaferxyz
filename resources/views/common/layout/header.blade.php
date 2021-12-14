@@ -2,7 +2,7 @@
 						<div class="app-header header top-header">
 							<div class="container-fluid">
 								<div class="d-flex">
-									<a class="header-brand" href="{{route('home')}}">
+									<a class="header-brand" href="{{route('tenant.home')}}">
 										<img src="{{URL::asset('assets/images/brand/logo.png')}}" class="header-brand-img desktop-lgo" alt="Dashtic logo">
 										<img src="{{URL::asset('assets/images/brand/logo1.png')}}" class="header-brand-img dark-logo" alt="Dashtic logo">
 										<img src="{{URL::asset('assets/images/brand/favicon.png')}}" class="header-brand-img mobile-logo" alt="Dashtic logo">

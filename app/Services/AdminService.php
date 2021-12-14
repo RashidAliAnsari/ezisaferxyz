@@ -2,19 +2,22 @@
 
 namespace App\Services;
 
+use File;
 use App\Models\User;
 use App\Models\Tenant;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminService
 {
-
+    
     private function initilizeSingleTenant($tenantId)
     {
         $tenant = Tenant::with('domains:domain,tenant_id')->where('id', $tenantId)->first();
         tenancy()->initialize($tenant);
         return $tenant;
     }
-
+    
     public function getAllAgencies()
     {
         $users = collect();
@@ -28,7 +31,7 @@ class AdminService
         }
         return $users;
     }
-
+    
     public function AgencyProfile($tenantId)
     {
         $tenant = $this->initilizeSingleTenant($tenantId);
@@ -36,7 +39,7 @@ class AdminService
         $tenantUser->tenant = $tenant;
         return $tenantUser;
     }
-
+    
     public function ApproveDeclineTenant($tenantId, $status)
     {
         $this->initilizeSingleTenant($tenantId);
@@ -50,6 +53,77 @@ class AdminService
         }
         
     }
+    
+    public function openJSONFile($code)
+    {
+        $jsonString = [];
+        if(File::exists(base_path('resources/lang/'.$code.'.json'))){
+            $jsonString = file_get_contents(base_path('resources/lang/'.$code.'.json'));
+            $jsonString = json_decode($jsonString, true);
+        }
+        return $jsonString;
+    }
 
+    public function saveJSONFile($code, $data){
+        ksort($data);
+        $jsonData = json_encode($data, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+        file_put_contents(base_path('resources/lang/'.$code.'.json'), stripslashes($jsonData));
+    }
+    
+    public function languages()
+    {
+        $languages = DB::table('languages')->get();
+        $columns = [];
+        $columnsCount = $languages->count();
+        
+        if($languages->count() > 0){
+            foreach ($languages as $key => $language){
+                if ($key == 0) {
+                    $columns[$key] = $this->openJSONFile($language->code);
+                }
+                $columns[++$key] = ['data'=>$this->openJSONFile($language->code), 'lang'=>$language->code];
+            }
+        }
+        
+        $result = ['languages' => $languages, 'columns' => $columns, 'columnsCount' => $columnsCount];
+        return $result;
+        
+    }
 
+    public function destroyTranslation($key)
+    {
+        $languages = DB::table('languages')->get();
+        if($languages->count() > 0){
+            foreach ($languages as $language){
+                $data = $this->openJSONFile($language->code);
+                unset($data[$key]);
+                $this->saveJSONFile($language->code, $data);
+            }
+        }
+    }
+
+    public function transUpdate(Request $request)
+    {
+        $data = $this->openJSONFile($request->code);
+        $data[$request->pk] = $request->value;
+
+        $this->saveJSONFile($request->code, $data);
+    }
+
+    public function transUpdateKey(Request $request)
+    {
+        $languages = DB::table('languages')->get();
+        if($languages->count() > 0){
+            foreach ($languages as $language){
+                $data = $this->openJSONFile($language->code);
+                if (isset($data[$request->pk])){
+                    $data[$request->value] = $data[$request->pk];
+                    unset($data[$request->pk]);
+                    $this->saveJSONFile($language->code, $data);
+                }
+            }
+        }
+    }
+    
+    
 }

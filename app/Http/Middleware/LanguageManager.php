@@ -3,14 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Traits\SweetAlert;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 
-class isApproved
+class LanguageManager
 {
-    use SweetAlert;
-    
     /**
      * Handle an incoming request.
      *
@@ -20,11 +17,10 @@ class isApproved
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->is_approved == 1) {
-            return $next($request);
+        if (session()->has('locale')) {
+            App::setLocale(session()->get('locale'));
         }
-
-        $this->realRashidToast('Sorry! Your profile not approved yet.', 'error');
-        return redirect()->route('tenant.not-approved');
+        
+        return $next($request);
     }
 }
