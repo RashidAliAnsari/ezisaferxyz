@@ -9,6 +9,7 @@
 		<meta name="keywords" content="Admin, Admin Template, Dashboard, Responsive, Admin Dashboard, Bootstrap, Bootstrap 4, Clean, Backend, Jquery, Modern, Web App, Admin Panel, Ui, Premium Admin Templates, Flat, Admin Theme, Ui Kit, Bootstrap Admin, Responsive Admin, Application, Template, Admin Themes, Dashboard Template"/> --}}
 		<title>Ezisafer</title>
 		@include('common.layout.head')
+		@livewireStyles
 	</head>
 
 	<body class="app sidebar-mini {{Auth::user()->is_dark_mode ? 'dark-mode dark-sidebar' : 'light-mode light-sidebar'}}">
@@ -29,6 +30,7 @@
 						@yield('content')
             			@include('common.layout.footer')
 		</div><!-- End Page -->
-			@include('common.layout.footer-scripts')	
+			@include('common.layout.footer-scripts')
+			@livewireScripts	
 	</body>
 </html>

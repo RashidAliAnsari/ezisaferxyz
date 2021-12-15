@@ -22,7 +22,7 @@ class VerifyEmailController extends Controller
             Auth::login($user);
             $this->realRashidToast('You are logged in successfully', 'success');
             if (Auth::user()->hasRole('agency')) {
-                return redirect()->route('home');
+                return redirect()->route('tenant.home');
             }
             if(Auth::user()->hasRole('customer')) {
                 return redirect()->route('dashboard');
