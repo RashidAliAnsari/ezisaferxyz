@@ -19,17 +19,17 @@ Route::get('/', function () {
 
 // test routes
 Route::group(['prefix' => 'test'], function(){
-    Route::get('clearCache', 'TestController@clearCache');
-    Route::get('migrate', 'TestController@migrate');
-    Route::get('migrateFresh', 'TestController@migrateFresh');
-    Route::get('dbSeed', 'TestController@dbSeed');
-    Route::get('createTenant', 'TestController@createTenant');
-    Route::get('test', 'TestController@test');
+    Route::get('clearCache', 'App\Http\Controllers\TestController@clearCache');
+    Route::get('migrate', 'App\Http\Controllers\TestController@migrate');
+    Route::get('migrateFresh', 'App\Http\Controllers\TestController@migrateFresh');
+    Route::get('dbSeed', 'App\Http\Controllers\TestController@dbSeed');
+    Route::get('createTenant', 'App\Http\Controllers\TestController@createTenant');
+    Route::get('test', 'App\Http\Controllers\TestController@test');
 });
 
 //Frontend routes
 Route::view('/create/agency', 'central.frontend.createAgency');
-Route::post('/create/agency', 'central\createAgency@store');
+Route::post('/create/agency', 'App\Http\Controllers\central\createAgency@store');
 
 
 
@@ -40,16 +40,22 @@ Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
 ], function(){
-    // $namespace = 'App\Http\Controllers\central';
-    $namespace = 'central';
-    Route::view('/login', 'central.frontend.login')->name('login')->withoutMiddleware(['auth','isVerify','role:super-admin']);
-    Route::post('/login', 'tenant\auth\LoginController@login')->name('login.post')->withoutMiddleware(['auth','isVerify','role:super-admin']);
-    Route::post('/logout', 'tenant\auth\LoginController@logout')->name('logout');
-    
-    Route::get('/home', $namespace.'\HomeController@home')->name('home');
+    $namespace = 'App\Http\Controllers\central';
+    // $namespace = 'central';
+    $T = 'App\Http\Livewire\Admin';    // for Admin namespace
+    Route::get('/livewire-test', $T.'\Test')->name('test');
 
-    Route::get('/agencies', $namespace.'\HomeController@showAllAgencies')->name('agencies.show');
-    Route::get('/agencies/{tenantId}/profile', $namespace.'\HomeController@AgencyProfile')->name('agency.profile');
+    Route::view('/login', 'central.frontend.login')->name('login')->withoutMiddleware(['auth','isVerify','role:super-admin']);
+    Route::post('/login', 'App\Http\Controllers\tenant\auth\LoginController@login')->name('login.post')->withoutMiddleware(['auth','isVerify','role:super-admin']);
+    Route::post('/logout', 'App\Http\Controllers\tenant\auth\LoginController@logout')->name('logout');
+    
+    // Route::get('/home', $namespace.'\HomeController@home')->name('home');
+    Route::get('/home', $T.'\Home')->name('home');
+
+    // Route::get('/agencies', $namespace.'\HomeController@showAllAgencies')->name('agencies.show');
+    Route::get('/agencies', $T.'\Users\Agencies\index')->name('agencies.show');
+    // Route::get('/agencies/{tenantId}/profile', $namespace.'\HomeController@AgencyProfile')->name('agency.profile');
+    Route::get('/agencies/{tenantId}/profile', $T.'\Users\Agencies\ShowProfile')->name('agency.profile');
     Route::get('/agency/approve/{tenantId}/{status}', $namespace.'\HomeController@AgencyApprove')->name('agency.approve');
 
     // multilingual - translations
@@ -67,9 +73,9 @@ Route::group([
 // common routes with tenant
 Route::middleware(['auth', 'isVerify'])->group(function(){
     
-    Route::get('/switch-screen-mode/{is_dark_mode}', 'CommonController@screenMode')->name('admin.screenMode');
+    Route::get('/switch-screen-mode/{is_dark_mode}', 'App\Http\Controllers\CommonController@screenMode')->name('admin.screenMode');
 
-    Route::get('lang/change', 'CommonController@changeLang')->name('changeLang')->withoutMiddleware(['auth', 'isVerify']);
+    Route::get('lang/change', 'App\Http\Controllers\CommonController@changeLang')->name('changeLang')->withoutMiddleware(['auth', 'isVerify']);
     
 });
 

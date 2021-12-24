@@ -44,6 +44,11 @@ class createAgency extends Controller
             session()->forget('agency');
         });
 
+        // for creating tenant directories in storage folder
+        $storage_path = storage_path();
+        $storage_path = $storage_path . '/' . 'tenant'.$tenant->id;
+        mkdir("$storage_path/framework/cache", 0777, true);
+
 
         return redirect()->route('verify.email')->domain($request->domain);
 

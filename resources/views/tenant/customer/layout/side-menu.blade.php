@@ -1,11 +1,15 @@
 <!--aside open-->
 <div class="app-sidebar app-sidebar2">
     <div class="app-sidebar__logo">
-        <a class="header-brand" href="{{route('dashboard')}}">
-            <img src="{{URL::asset('assets/images/brand/logo.png')}}" class="header-brand-img desktop-lgo" alt="Covido logo">
-            <img src="{{URL::asset('assets/images/brand/logo1.png')}}" class="header-brand-img dark-logo" alt="Covido logo">
-            <img src="{{URL::asset('assets/images/brand/favicon.png')}}" class="header-brand-img mobile-logo" alt="Covido logo">
-            <img src="{{URL::asset('assets/images/brand/favicon1.png')}}" class="header-brand-img darkmobile-logo" alt="Covido logo">
+        <a class="header-brand" href="{{ route('customer.dashboard') }}">
+            <img src="{{ URL::asset('assets/images/brand/logo.png') }}" class="header-brand-img desktop-lgo"
+                alt="Covido logo">
+            <img src="{{ URL::asset('assets/images/brand/logo1.png') }}" class="header-brand-img dark-logo"
+                alt="Covido logo">
+            <img src="{{ URL::asset('assets/images/brand/favicon.png') }}" class="header-brand-img mobile-logo"
+                alt="Covido logo">
+            <img src="{{ URL::asset('assets/images/brand/favicon1.png') }}" class="header-brand-img darkmobile-logo"
+                alt="Covido logo">
         </a>
     </div>
 </div>
@@ -13,55 +17,61 @@
     <div class="app-sidebar__user">
         <div class="dropdown user-pro-body text-center">
             <div class="user-pic">
-                <img src="{{URL::asset('assets/images/users/16.jpg')}}" alt="user-img" class="avatar-xl rounded-circle mb-1">
+                <img src="{{ URL::asset('assets/images/users/16.jpg') }}" alt="user-img"
+                    class="avatar-xl rounded-circle mb-1">
             </div>
             <div class="user-info">
-                <h5 class=" mb-1 font-weight-bold">{{Auth::user()->name}}</h5>
+                <h5 class=" mb-1 font-weight-bold">{{ Auth::user()->name }}</h5>
             </div>
         </div>
     </div>
     <ul class="side-menu">
         <li class="slide">
-            <a class="side-menu__item"  data-toggle="slide" href="{{ route('dashboard')}}">
-            <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            <span class="side-menu__label">Dashboard</span></a>
+            <a class="side-menu__item" href="{{ route('customer.dashboard') }}">
+                <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="26"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span class="side-menu__label">Dashboard</span></a>
         </li>
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
-            <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
-            <span class="side-menu__label">Pages</span><i class="angle fa fa-angle-right"></i></a>
+            <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                    <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                </svg>
+                <span class="side-menu__label">Setting</span><i class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li><a href="{{ url('/' . $page='chart-chartist') }}" class="slide-item">One</a></li>
-                <li><a href="{{ url('/' . $page='chart-morris') }}" class="slide-item">Two</a></li>
-                <li><a href="{{ url('/' . $page='chart-apex') }}" class="slide-item"> Three</a></li>
-                <li><a href="{{ url('/' . $page='chart-peity') }}" class="slide-item">Four</a></li>
-                <li><a href="{{ url('/' . $page='chart-echart') }}" class="slide-item">Five</a></li>
-                <li><a href="{{ url('/' . $page='chart-flot') }}" class="slide-item">Six</a></li>
-                <li><a href="{{ url('/' . $page='chart-c3') }}" class="slide-item">Seven</a></li>
+                <li><a href="{{ route('customer.profile') }}" class="slide-item">Profile</a></li>
             </ul>
         </li>
     </ul>
     <div class="app-sidebar-help">
         <div class="dropdown text-center">
             <div class="help d-flex">
-                <a href="{{ url('/' . $page='#') }}" class="nav-link p-0 help-dropdown" data-toggle="dropdown">
+                <a href="{{ url('/' . ($page = '#')) }}" class="nav-link p-0 help-dropdown" data-toggle="dropdown">
                     <span class="font-weight-bold">Help Info</span> <i class="fa fa-angle-down ml-2"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow p-4">
                     <div class="border-bottom pb-3">
                         <h4 class="font-weight-bold">Help</h4>
-                        <a class="text-primary d-block" href="{{ url('/' . $page='#') }}">Knowledge base</a>
-                        <a class="text-primary d-block" href="{{ url('/' . $page='#') }}">Contact@info.com</a>
-                        <a class="text-primary d-block" href="{{ url('/' . $page='#') }}">88 8888 8888</a>
+                        <a class="text-primary d-block" href="{{ url('/' . ($page = '#')) }}">Knowledge base</a>
+                        <a class="text-primary d-block" href="{{ url('/' . ($page = '#')) }}">Contact@info.com</a>
+                        <a class="text-primary d-block" href="{{ url('/' . ($page = '#')) }}">88 8888 8888</a>
                     </div>
                     <div class="border-bottom pb-3 pt-3 mb-3">
                         <p class="mb-1">Your Fax Number</p>
-                        <a class="font-weight-bold" href="{{ url('/' . $page='#') }}">88 8888 8888</a>
+                        <a class="font-weight-bold" href="{{ url('/' . ($page = '#')) }}">88 8888 8888</a>
                     </div>
-                    <a class="text-primary" href="{{url('logout')}}" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                    <a class="text-primary" href="{{ url('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
                         Logout
                     </a>
-                    <form action="{{route('logout')}}" method="post" id="logoutForm">@csrf</form>
+                    <form action="{{ route('logout') }}" method="post" id="logoutForm">@csrf</form>
                 </div>
                 {{-- <div class="ml-auto">
                     <a class="nav-link icon p-0" href="{{ url('/' . $page='#') }}">

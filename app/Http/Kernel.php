@@ -45,6 +45,7 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'universal' => [],  // added later - tenancy universal routes
     ];
 
     /**

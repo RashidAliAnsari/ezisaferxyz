@@ -1,0 +1,7 @@
+.input-required, .input-error {
+    color: red;
+}
+
+.input-error {
+    margin-top: 2px;
+}

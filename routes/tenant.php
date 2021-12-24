@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Http\Livewire\Tenant\Home;
+use App\Http\Livewire\Tenant\Profile;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Tenant\NotApproved;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -22,6 +25,7 @@ Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
+    'universal',
     ])->group(function () {
         // Route::get('/', function () {
             //     dd(\App\Models\User::all());
@@ -53,43 +57,48 @@ Route::middleware([
                 Route::get('reset-password/{token}', $namespaceTenant. '\auth\ForgotPasswordController@showResetPasswordForm')->name('reset.password.get');
                 Route::post('reset-password', $namespaceTenant. '\auth\ForgotPasswordController@submitResetPasswordForm')->name('reset.password.post');
                 
+
+
                 // Agency After Logged in
-                // Route::middleware(['auth', 'isVerify', 'role:agency', 'isApproved'])->group(function(){
-                    
                 Route::group([
                     'middleware' => ['auth', 'isVerify', 'role:agency', 'isApproved'],
-                    // 'prefix' => 'tenant',
                     'as' => 'tenant.',
                 ], function(){
                     
-                    $namespaceTenant = 'App\Http\Controllers\tenant';
-                    $resources = 'tenant.backend';
+                    $T = 'App\Http\Livewire\Tenant';    // for tenant(agency) namespace
                     
-                    Route::view('/home', $resources.'.home')->name('home');
-                    Route::view('/not-approved', $resources.'.not-approved')->name('not-approved')->withoutMiddleware(['isApproved']);
-                    Route::get('/profile', $namespaceTenant.'\ProfileController@index')->name('profile')->withoutMiddleware(['isApproved']);
-                    
+                    Route::get('/home', $T.'\Home')->name('home');
+                    Route::get('/not-approved', $T.'\NotApproved')->name('not-approved')->withoutMiddleware(['isApproved']);
+                    Route::get('/profile', $T.'\Profile')->name('profile')->withoutMiddleware(['isApproved']);
                     
                 });
+                
+                
+
+
+                // Customer After Logged in
+                Route::group([
+                    'middleware' => ['auth', 'isVerify', 'role:customer'],
+                    'as' => 'customer.',
+                ], function(){
+
+                    $T = 'App\Http\Livewire\Customer';    // for customer namespace
+                
+                    Route::get('/dashboard', $T.'\Dashboard')->name('dashboard');
+                    // Route::get('/profile', $T.'\Profile')->name('profile');
+
+                });
+                
+
+
+                
+                // Common routes for Agency and customer after Logged in
+                Route::middleware(['auth', 'isVerify'])->group(function(){
                     
-                    
-                    // Customer After Logged in
-                    Route::middleware(['auth', 'isVerify', 'role:customer'])->group(function(){
-                        
-                        $namespaceCustomer = 'App\Http\Controllers\tenant\customer';
-                        $resources = 'tenant.customer';
-                        
-                        Route::get('/dashboard', $namespaceCustomer.'\DashboardController@index')->name('dashboard');
-                    });
-                    
-                    
-                    // Common routes for Agency and customer after Logged in
-                    Route::middleware(['auth', 'isVerify'])->group(function(){
-                        
-                        Route::get('/switch-screen-mode/{is_dark_mode}', 'App\Http\Controllers\CommonController@screenMode')->name('screenMode');
-                        
-                    });
-                    
-                    
+                    Route::get('/switch-screen-mode/{is_dark_mode}', 'App\Http\Controllers\CommonController@screenMode')->name('screenMode');
                     
                 });
+                
+                
+                
+            });

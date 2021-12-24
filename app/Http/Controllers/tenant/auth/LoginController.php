@@ -22,7 +22,7 @@ class LoginController extends Controller
                 return redirect()->route('tenant.home');
             }
             if(Auth::user()->hasRole('customer')) {
-                return redirect()->route('dashboard');
+                return redirect()->route('customer.dashboard');
             }
             if(Auth::user()->hasRole('super-admin')) {
                 return redirect()->route('admin.home');

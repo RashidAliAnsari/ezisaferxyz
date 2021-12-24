@@ -4,3 +4,9 @@ https://tenancyforlaravel.com/docs/v3/manual-initialization
 https://tenancyforlaravel.com/docs/v3/quickstart/
 https://laracasts.com/discuss/channels/laravel/how-to-get-to-tenants-data-throw-central-admin-panel?page=1&replyId=694117
 https://stackoverflow.com/questions/65380106/access-the-data-from-central-db-inside-tenant-domain-and-vice-versa-stancl-tenan
+
+
+-- get central data on tenant app
+
+https://stackoverflow.com/questions/65380106/access-the-data-from-central-db-inside-tenant-domain-and-vice-versa-stancl-tenan
+https://github.com/archtechx/tenancy/releases/tag/v3.3.0
