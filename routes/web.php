@@ -53,7 +53,7 @@ Route::group([
     Route::get('/home', $T.'\Home')->name('home');
 
     // Route::get('/agencies', $namespace.'\HomeController@showAllAgencies')->name('agencies.show');
-    // Route::get('/agencies', $T.'\Users\Agencies\index')->name('agencies.show');
+    Route::get('/agencies', $T.'\Users\Agencies\Index')->name('agencies.show');
     // Route::get('/agencies/{tenantId}/profile', $namespace.'\HomeController@AgencyProfile')->name('agency.profile');
     Route::get('/agencies/{tenantId}/profile', $T.'\Users\Agencies\ShowProfile')->name('agency.profile');
     Route::get('/agency/approve/{tenantId}/{status}', $namespace.'\HomeController@AgencyApprove')->name('agency.approve');
