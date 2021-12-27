@@ -59,9 +59,9 @@ class TestController extends Controller
             '--force' => true
         ]);
 
-        \Artisan::call('db:seed --class=CreateLanguages', [
-            '--force' => true
-        ]);
+        // \Artisan::call('db:seed --class=CreateLanguages', [
+        //     '--force' => true
+        // ]);
 
         $superAdmin = User::create([
             'name' => 'Mohammad Asri',
