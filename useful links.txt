@@ -10,3 +10,13 @@ https://stackoverflow.com/questions/65380106/access-the-data-from-central-db-ins
 
 https://stackoverflow.com/questions/65380106/access-the-data-from-central-db-inside-tenant-domain-and-vice-versa-stancl-tenan
 https://github.com/archtechx/tenancy/releases/tag/v3.3.0
+
+
+-- can't store single eloquent record in livewire component's public property
+
+https://forum.laravel-livewire.com/t/help-me-solve-the-hardest-problem-in-livewire-and-maybe-the-entire-world/22/37
+
+then the solution for this problem is to use computed properties
+
+-- livewire alert package
+https://github.com/jantinnerezo/livewire-alert (we can use it)

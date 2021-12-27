@@ -39,6 +39,8 @@
                 </div><!-- End Page -->
                 @include('common.layout.admin-horizontal.footer-scripts')
                 {{-- @livewireScripts --}}
+
+
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ Route::post('/create/agency', 'App\Http\Controllers\central\createAgency@store')
 
 //Backend routes for super-admin
 Route::group([
-    'middleware' => ['auth', 'isVerify', 'role:super-admin'],
+    'middleware' => ['auth', 'isVerify', 'role:super-admin', 'universal', InitializeTenancyByDomain::class],
     'prefix' => 'admin',
     'as' => 'admin.',
 ], function(){
@@ -56,7 +57,7 @@ Route::group([
     Route::get('/agencies', $T.'\Users\Agencies\Index')->name('agencies.show');
     // Route::get('/agencies/{tenantId}/profile', $namespace.'\HomeController@AgencyProfile')->name('agency.profile');
     Route::get('/agencies/{tenantId}/profile', $T.'\Users\Agencies\ShowProfile')->name('agency.profile');
-    Route::get('/agency/approve/{tenantId}/{status}', $namespace.'\HomeController@AgencyApprove')->name('agency.approve');
+    // Route::get('/agency/approve/{tenantId}/{status}', $namespace.'\HomeController@AgencyApprove')->name('agency.approve');
 
     // multilingual - translations
     Route::get('languages', $namespace.'\HomeController@getAllLanguages')->name('languages');
@@ -64,6 +65,8 @@ Route::group([
     Route::post('translations/updateKey', $namespace.'\HomeController@transUpdateKey')->name('translation.update.json.key');
     Route::delete('translations/destroy/{key}', $namespace.'\HomeController@destroyTranslation')->name('translations.destroy');
     Route::post('translations/create', $namespace.'\HomeController@storeTranslation')->name('translations.create');
+
+    Route::get('/localization', $T.'\Localization')->name('localization');
 
 
 });

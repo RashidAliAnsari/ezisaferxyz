@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Users\Agencies;
 
+use App\Models\User;
 use Livewire\Component;
 use App\Services\AdminService;
 
@@ -12,7 +13,6 @@ class Index extends Component
     public function mount(AdminService $AdminService)
     {
         $this->agencies = $AdminService->getAllAgencies();
-        // dd($this->agencies);
     }
 
     public function render()

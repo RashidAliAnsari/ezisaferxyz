@@ -5,6 +5,7 @@ namespace App\Services;
 use File;
 use App\Models\User;
 use App\Models\Tenant;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -72,7 +73,8 @@ class AdminService
     
     public function languages()
     {
-        $languages = DB::table('languages')->get();
+        // $languages = DB::table('languages')->get();
+        $languages = Language::all();
         $columns = [];
         $columnsCount = $languages->count();
         
@@ -102,27 +104,66 @@ class AdminService
         }
     }
 
-    public function transUpdate(Request $request)
-    {
-        $data = $this->openJSONFile($request->code);
-        $data[$request->pk] = $request->value;
+    // public function transUpdate(Request $request)
+    // {
+    //     $data = $this->openJSONFile($request->code);
+    //     $data[$request->pk] = $request->value;
 
-        $this->saveJSONFile($request->code, $data);
+    //     $this->saveJSONFile($request->code, $data);
+    // }
+
+    public function transUpdate($form)
+    {
+        $data = $this->openJSONFile('en');
+        $data[$form['key']] = $form['value_en'];
+        $this->saveJSONFile('en', $data);
+
+        $data = $this->openJSONFile('ms');
+        $data[$form['key']] = $form['value_ms'];
+        $this->saveJSONFile('ms', $data);
+
     }
 
-    public function transUpdateKey(Request $request)
+    // public function transUpdateKey(Request $request)
+    // {
+    //     $languages = DB::table('languages')->get();
+    //     if($languages->count() > 0){
+    //         foreach ($languages as $language){
+    //             $data = $this->openJSONFile($language->code);
+    //             if (isset($data[$request->pk])){
+    //                 $data[$request->value] = $data[$request->pk];
+    //                 unset($data[$request->pk]);
+    //                 $this->saveJSONFile($language->code, $data);
+    //             }
+    //         }
+    //     }
+    // }
+
+    public function transUpdateKey($preKey, $updatedKey)
     {
         $languages = DB::table('languages')->get();
         if($languages->count() > 0){
             foreach ($languages as $language){
                 $data = $this->openJSONFile($language->code);
-                if (isset($data[$request->pk])){
-                    $data[$request->value] = $data[$request->pk];
-                    unset($data[$request->pk]);
+                if (isset($data[$preKey])){
+                    $data[$updatedKey] = $data[$preKey];
+                    unset($data[$preKey]);
                     $this->saveJSONFile($language->code, $data);
                 }
             }
         }
+    }
+
+    public function transEditValuesAgainstSingleKey($updateKey)   // added later
+    {
+        $record = [];
+        $languages = Language::all();
+            foreach ($languages as $key => $language){
+                $data = $this->openJSONFile($language->code);
+                $record[$language->code] = $data[$updateKey];
+            }
+
+        return $record;
     }
     
     

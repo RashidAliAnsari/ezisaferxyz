@@ -5,3 +5,7 @@
 .input-error {
     margin-top: 2px;
 }
+
+.modal-input-error {
+    float: left;
+}

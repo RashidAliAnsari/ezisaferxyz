@@ -1,4 +1,4 @@
-{{-- <x-page-header title="Agencies">
+<x-page-header title="Agencies">
     <li class="breadcrumb-item"><a href="{{ route('admin.home') }}" class="d-flex"><svg class="svg-icon"
                 xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                 <path d="M0 0h24v24H0V0z" fill="none" />
@@ -8,7 +8,7 @@
     <li class="breadcrumb-item" aria-current="page">Users</li>
     <li class="breadcrumb-item"><a href="{{ route('admin.agencies.show') }}">Agencies</a></li>
     <li class="breadcrumb-item active" aria-current="page">Agency Profile</li>
-</x-page-header> --}}
+</x-page-header>
 
 <!-- Row -->
 <div class="row">
@@ -18,24 +18,24 @@
                     src="{{ URL::asset('assets/images/users/16.jpg') }}"></div>
             <div class="card-body text-center">
                 <div class="pro-user">
-                    <h4 class="pro-user-username text-dark mb-1 font-weight-bold">{{ $AgencyProfile->agency_name }}
+                    <h4 class="pro-user-username text-dark mb-1 font-weight-bold">{{ $this->agency->agency_name }}
                     </h4>
-                    <h6 class="pro-user-desc text-muted">{{ $AgencyProfile->tenant->domains[0]->domain }}</h6>
+                    <h6 class="pro-user-desc text-muted">{{ $this->agency->tenant->domains[0]->domain }}</h6>
 
-                    @switch($AgencyProfile->is_approved)
+                    @switch($this->agency->is_approved)
                         @case(0)
-                            <button wire:click="AgencyApprove({{ $AgencyProfile->tenant->id }}, '1')"
-                                class="btn btn-success btn-sm mt-3">Approve</button>
+                            <button class="btn btn-success btn-sm mt-3"
+                                wire:click="AgencyApprove('{{ $this->agency->tenant->id }}', '1')">Approve</button>
                         @break
                         @case(1)
-                            {{-- <button wire:click="AgencyApprove('{{ $AgencyProfile->tenant->id }}, 0')" --}}
-                            <button wire:click="test" class="btn btn-danger btn-sm mt-3">Decline</button>
+                            <button class="btn btn-danger btn-sm mt-3"
+                                wire:click="AgencyApprove('{{ $this->agency->tenant->id }}', '0')">Decline</button>
                         @break
                         @default
-                            <button wire:click="AgencyApprove({{ $AgencyProfile->tenant->id }}, '1')"
-                                class="btn btn-success btn-sm mt-3">Approve</button>
-                            {{-- <button wire:click="AgencyApprove('{{ $AgencyProfile->tenant->id }}, 0')" --}}
-                            <button wire:click="test" class="btn btn-danger btn-sm mt-3">Decline</button>
+                            <button class="btn btn-success btn-sm mt-3"
+                                wire:click="AgencyApprove('{{ $this->agency->tenant->id }}', '1')">Approve</button>
+                            <button class="btn btn-danger btn-sm mt-3"
+                                wire:click="AgencyApprove('{{ $this->agency->tenant->id }}', '0')">Decline</button>
                     @endswitch
                 </div>
             </div>
@@ -50,14 +50,14 @@
                                 <td class="py-2 px-0">
                                     <span class="font-weight-semibold w-50">Name </span>
                                 </td>
-                                <td class="py-2 px-0">{{ $AgencyProfile->name }}</td>
+                                <td class="py-2 px-0">{{ $this->agency->name }}</td>
                             </tr>
                             <tr>
                                 <td class="py-2 px-0">
                                     <span class="font-weight-semibold w-50">Status </span>
                                 </td>
                                 <td class="py-2 px-0 text-info">
-                                    @switch($AgencyProfile->is_approved)
+                                    @switch($this->agency->is_approved)
                                         @case(0)
                                             Declined
                                         @break
@@ -73,19 +73,19 @@
                                 <td class="py-2 px-0">
                                     <span class="font-weight-semibold w-50">Website </span>
                                 </td>
-                                <td class="py-2 px-0">{{ $AgencyProfile->tenant->domains[0]->domain }}</td>
+                                <td class="py-2 px-0">{{ $this->agency->tenant->domains[0]->domain }}</td>
                             </tr>
                             <tr>
                                 <td class="py-2 px-0">
                                     <span class="font-weight-semibold w-50">Email </span>
                                 </td>
-                                <td class="py-2 px-0">{{ $AgencyProfile->email }}</td>
+                                <td class="py-2 px-0">{{ $this->agency->email }}</td>
                             </tr>
                             <tr>
                                 <td class="py-2 px-0">
                                     <span class="font-weight-semibold w-50">Phone </span>
                                 </td>
-                                <td class="py-2 px-0">{{ $AgencyProfile->phone_no }}</td>
+                                <td class="py-2 px-0">{{ $this->agency->phone_no }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -102,15 +102,21 @@
                         <div class="card-body">
                             <h5 class="font-weight-bold">Biography</h5>
                             <div class="main-profile-bio mb-0">
-                                <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                                <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                                    the
                                     industry's standard dummy when an unknown printer took a galley of type and
-                                    scrambled it to make a type specimen book. It has survived not only five centuries
+                                    scrambled it to make a type specimen book. It has survived not only five
+                                    centuries
                                     nchanged.</p>
-                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                    aliquip ex
+                                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                                    esse
                                     cillum dolore eu fugiat nulla pariatur. </p>
-                                <p class="mb-0">pleasure rationally encounter but because pursue consequences
-                                    that are extremely painful.occur in which toil and pain can procure him some great
+                                <p class="mb-0">pleasure rationally encounter but because pursue
+                                    consequences
+                                    that are extremely painful.occur in which toil and pain can procure him some
+                                    great
                                     pleasure.. <a href="">More</a></p>
                             </div>
                         </div>
