@@ -59,6 +59,10 @@ class TestController extends Controller
             '--force' => true
         ]);
 
+        \Artisan::call('db:seed --CreateLanguages', [
+            '--force' => true
+        ]);
+
         $superAdmin = User::create([
             'name' => 'Mohammad Asri',
             'email' => 'super.admin@ezisafer.xyz',
