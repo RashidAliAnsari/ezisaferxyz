@@ -59,7 +59,7 @@ class TestController extends Controller
             '--force' => true
         ]);
 
-        \Artisan::call('db:seed --CreateLanguages', [
+        \Artisan::call('db:seed --class=CreateLanguages', [
             '--force' => true
         ]);
 
