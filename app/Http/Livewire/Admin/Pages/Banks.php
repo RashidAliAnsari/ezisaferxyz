@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Pages;
 
 use App\Models\Bank;
 use Livewire\Component;
+use Monarobase\CountryList\CountryListFacade;
 
 class Banks extends Component
 {
@@ -27,7 +28,8 @@ class Banks extends Component
     public function mount()
     {
         $this->banks = Bank::latest()->get();
-        $this->countries = Countries::getList('en', 'json');
+        $this->countries = CountryListFacade::getList('en');
+        // dd($this->countries);
     }
     
     public function store()

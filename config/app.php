@@ -177,6 +177,7 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\TenancyServiceProvider::class, // <-- here
         // App\Providers\PermissionsServiceProvider::class, // <-- here
+        Monarobase\CountryList\CountryListServiceProvider::class, // <-- here
 
 
     ],
@@ -233,6 +234,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Countries' => Monarobase\CountryList\CountryListFacade::class,
 
     ],
 

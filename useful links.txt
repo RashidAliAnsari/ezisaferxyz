@@ -20,3 +20,7 @@ then the solution for this problem is to use computed properties
 
 -- livewire alert package
 https://github.com/jantinnerezo/livewire-alert (we can use it)
+
+
+-- used packages list
+https://dev.to/kingsconsult/how-to-get-the-entire-country-list-in-laravel-8-downwards-ahb

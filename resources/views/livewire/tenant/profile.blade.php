@@ -340,11 +340,9 @@
                                 <label class="form-label">Bank Name</label>
                                 <select class="form-control nice-select  select2"
                                     wire:model.debounce.500ms="form.bank_name">
-                                    <option value="1" {{ $form['bank_name'] == 1 ? 'selected' : '' }}>MEEZAN BANK
-                                    </option>
-                                    <option value="2" {{ $form['bank_name'] == 2 ? 'selected' : '' }}>HBL</option>
-                                    <option value="3" {{ $form['bank_name'] == 3 ? 'selected' : '' }}>JAZZ CASH
-                                    </option>
+                                    @foreach ($banks as $bank)
+                                        <option value="{{ $bank->bank_name }}">{{ $bank->bank_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

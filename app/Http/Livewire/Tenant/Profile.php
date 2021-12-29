@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Tenant;
 
+use App\Models\Bank;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\BusinessType;
@@ -15,7 +16,7 @@ class Profile extends Component
     // public $updateMode = false;
     // public $agency_namee;
     // public $testUsers;
-    public $form = [], $subdomain, $no_of_users, $business_types;
+    public $form = [], $subdomain, $no_of_users, $business_types, $banks;
     
     protected $rules = [
         'form.agency_name' => 'required',
@@ -72,7 +73,17 @@ class Profile extends Component
         $this->no_of_users = User::where('agency_name', '')->count();
 
         tenancy()->central(function () {
-            $this->business_types = BusinessType::all();
+            $this->business_types = BusinessType::where('is_active', 1)->get();
+            $this->banks = Bank::where('is_active', 1)->get();
+            // $this->banks = Bank::all()->groupBy('country_name');
+            
+            // foreach ($this->banks as $country) {
+            //     foreach ($country as $list) {
+            //         echo $list . '<br><br>';
+            //     }
+            // }
+            
+            // dd($this->banks);
         });
 
     }

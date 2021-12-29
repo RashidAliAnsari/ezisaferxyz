@@ -48,20 +48,20 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $bank->bank_name }}</td>
                                         <td>{{ $bank->country_name }}</td>
-                                        <td>{{ $type->is_active ? 'YES' : 'NO' }}</td>
+                                        <td>{{ $bank->is_active ? 'YES' : 'NO' }}</td>
                                         <td>
                                             <button class="btn btn-danger btn-sm remove-key" data-toggle="modal"
                                                 data-target="#confirm-delete"
-                                                wire:click="destroyId('{{ $type->id }}')">Delete</button>
+                                                wire:click="destroyId('{{ $bank->id }}')">Delete</button>
                                             <button class="btn btn-success btn-sm" data-toggle="modal"
                                                 data-target="#update-modal"
-                                                wire:click="edit('{{ $type->id }}', '{{ $type->name }}')">Edit</button>
-                                            @if ($type->is_active)
+                                                wire:click="edit('{{ $bank->id }}', '{{ $bank->bank_name }}', '{{ $bank->country_name }}')">Edit</button>
+                                            @if ($bank->is_active)
                                                 <button class="btn btn-primary btn-sm"
-                                                    wire:click="deactivate('{{ $type->id }}')">Deactive</button>
+                                                    wire:click="deactivate('{{ $bank->id }}')">Deactive</button>
                                             @else
                                                 <button class="btn btn-info btn-sm"
-                                                    wire:click="activate('{{ $type->id }}')">Active</button>
+                                                    wire:click="activate('{{ $bank->id }}')">Active</button>
                                             @endif
                                         </td>
                                     </tr>
@@ -96,8 +96,12 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter Country Name"
+                                <select class="form-control nice-select  select2"
                                     wire:model.debounce.500ms="form.country_name">
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country }}">{{ $country }}</option>
+                                    @endforeach
+                                </select>
                                 @error('form.country_name')<p class="help-block input-error modal-input-error">
                                         {{ $message }}</p>
                                 @enderror
