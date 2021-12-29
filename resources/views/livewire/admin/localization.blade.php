@@ -55,10 +55,10 @@
                                                     wire:click="destroyId('{{ $columnKey }}')">Delete</button>
                                                 <button class="btn btn-success btn-sm" data-toggle="modal"
                                                     data-target="#update-modal"
-                                                    wire:click="editKey('{{ $columnKey }}')">Update Key</button>
+                                                    wire:click="editKey('{{ $columnKey }}')">Edit Key</button>
                                                 <button class="btn btn-primary btn-sm" data-toggle="modal"
                                                     data-target="#update-modal-values"
-                                                    wire:click="editValue('{{ $columnKey }}')">Update
+                                                    wire:click="editValue('{{ $columnKey }}')">Edit
                                                     Values</button>
                                             </td>
                                         </tr>
@@ -135,7 +135,7 @@
 
 @section('js')
     <!-- Data tables -->
-    {{-- <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
@@ -152,7 +152,7 @@
     <script src="{{ URL::asset('assets/plugins/select2/select2.full.min.js') }}"></script>
     <!-- Bootstrap Editable -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js">
-    </script> --}}
+    </script>
 
     {{-- <script>
         $(document).ready(function() {

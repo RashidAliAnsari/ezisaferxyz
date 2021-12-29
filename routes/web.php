@@ -68,6 +68,9 @@ Route::group([
 
     Route::get('/localization', $T.'\Localization')->name('localization');
 
+    Route::get('/business-types', $T.'\Pages\BusinessTypes')->name('business.types');
+    Route::get('/banks', $T.'\Pages\Banks')->name('banks');
+
 
 });
 

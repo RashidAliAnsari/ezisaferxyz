@@ -9,3 +9,7 @@
 .modal-input-error {
     float: left;
 }
+
+.listing-page-submit-btn {
+    margin-top: -15px;
+}

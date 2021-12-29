@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Tenant;
 
 use App\Models\User;
 use Livewire\Component;
+use App\Models\BusinessType;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,10 +12,10 @@ class Profile extends Component
 {
     use WithFileUploads;
     
-    public $updateMode = false;
-    public $agency_namee;
-    public $testUsers;
-    public $form = [];
+    // public $updateMode = false;
+    // public $agency_namee;
+    // public $testUsers;
+    public $form = [], $subdomain, $no_of_users, $business_types;
     
     protected $rules = [
         'form.agency_name' => 'required',
@@ -27,7 +28,7 @@ class Profile extends Component
         'form.address' => 'required',
         'form.contact_person' => 'required',
         'form.telephone' => 'required',
-        'form.headphone' => 'required',
+        'form.handphone' => 'required',
         'form.email' => 'required|email|unique:users',
         'form.profile_logo' => 'image|max:1024|mimes:jpg,png,jpeg',
         'form.contact_person' => 'required',
@@ -45,7 +46,7 @@ class Profile extends Component
         'form.address.required' => 'The Address cannot be empty.',
         'form.contact_person.required' => 'The Contact Person cannot be empty.',
         'form.telephone.required' => 'The Telephone cannot be empty.',
-        'form.headphone.required' => 'The Headphone cannot be empty.',
+        'form.handphone.required' => 'The Handphone cannot be empty.',
         'form.email.required' => 'The Email cannot be empty.',
         'form.email.email' => 'The Email should be a valid email.',
         'form.profile_logo.image' => 'The Profile Logo should be an image.',
@@ -54,18 +55,31 @@ class Profile extends Component
         'form.contact_person.required' => 'The Contact Person cannot be empty.',
     ];
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function mount()
     {
         // $this->agency_namee = Auth::user()->agency_name;
         $this->form['agency_name'] = Auth::user()->agency_name;
         $this->form['business_type'] = 2;
         $this->form['bank_name'] = 1;
+
         // dd(storage_path());
+        $this->subdomain = strtok(request()->getHost(), '.');
+        $this->no_of_users = User::where('agency_name', '')->count();
+
+        tenancy()->central(function () {
+            $this->business_types = BusinessType::all();
+        });
+
     }
 
-    public function updated($propertyName)
+    public function getAgencyProperty()
     {
-        $this->validateOnly($propertyName);
+        return Auth::user();
     }
 
     public function submit()
@@ -90,6 +104,8 @@ class Profile extends Component
     public function render()
     {
         return view('livewire.tenant.profile')
-        ->layout('tenant.backend.layout.app', ['agency_name' => $this->agency_namee]);
+        ->layout('tenant.backend.layout.app', [
+            // 'agency_name' => $this->agency_namee
+        ]);
     }
 }

@@ -1,11 +1,11 @@
-<div wire:ignore.self class="modal" id="update-modal">
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal" id="update-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
         <div class="modal-content modal-content-demo">
             <form wire:submit.prevent="updateKey">
                 <div class="modal-header">
-                    <h6 class="modal-title">Updae Translation Key</h6><button aria-label="Close" class="close"
-                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    <h6 class="modal-title">Update Translation Key</h6><button aria-label="Close"
+                        class="close" data-dismiss="modal" type="button"><span
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="">
@@ -28,8 +28,8 @@
 </div>
 
 
-<div wire:ignore.self class="modal" id="update-modal-values">
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal" id="update-modal-values" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
         <div class="modal-content modal-content-demo">
             <form wire:submit.prevent="updateValue">

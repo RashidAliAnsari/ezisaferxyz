@@ -31,7 +31,18 @@
                                 <td class="py-2 px-0">
                                     <span class="font-weight-semibold w-50">Agency Status</span>
                                 </td>
-                                <td class="py-2 px-0">PENDING</td>
+                                <td class="py-2 px-0">
+                                    @switch($this->agency->is_approved)
+                                        @case(0)
+                                            DECLINED
+                                        @break
+                                        @case(1)
+                                            APPROVED
+                                        @break
+                                        @default
+                                            PENDING
+                                    @endswitch
+                                </td>
                             </tr>
                             <tr>
                                 <td class="py-2 px-0">
@@ -43,7 +54,7 @@
                                 <td class="py-2 px-0">
                                     <span class="font-weight-semibold w-50">Subdomain</span>
                                 </td>
-                                <td class="py-2 px-0">SubdomainName</td>
+                                <td class="py-2 px-0">{{ $subdomain }}</td>
                             </tr>
                             <tr>
                                 <td class="py-2 px-0">
@@ -61,7 +72,7 @@
                                 <td class="py-2 px-0">
                                     <span class="font-weight-semibold w-50">No Of Users</span>
                                 </td>
-                                <td class="py-2 px-0">1</td>
+                                <td class="py-2 px-0">{{ $no_of_users }}</td>
                             </tr>
                             <tr>
                                 <td class="py-2 px-0">
@@ -77,7 +88,7 @@
                             </tr>
                             <tr>
                                 <td class="py-2 px-0">
-                                    <span class="font-weight-semibold w-50">WATSAPP Subscription</span>
+                                    <span class="font-weight-semibold w-50">WHATSAPP Subscription</span>
                                 </td>
                                 <td class="py-2 px-0">Not Applicable</td>
                             </tr>
@@ -145,16 +156,9 @@
                                 <label class="form-label">Business Type<span class="input-required">*</span></label>
                                 <select class="form-control nice-select  select2"
                                     wire:model.debounce.500ms="form.business_type">
-
-                                    <option value="10" {{ $form['business_type'] == 10 ? 'selected' : '' }}>TRAVEL
-                                        AGENCY
-                                    </option>
-                                    <option value="1" {{ $form['business_type'] == 1 ? 'selected' : '' }}>Business
-                                        Type One</option>
-                                    <option value="2" {{ $form['business_type'] == 2 ? 'selected' : '' }}>Business
-                                        Type Two</option>
-                                    <option value="3" {{ $form['business_type'] == 3 ? 'selected' : '' }}>Business
-                                        Type Three</option>
+                                    @foreach ($business_types as $type)
+                                        <option value="{{ $type->name }}">{{ $type->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -181,34 +185,19 @@
                         </div>
                         <div class="col-sm-6 col-md-6">
                             <div class="form-group">
-                                <label class="form-label">Banner Logo</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="example-file-input-custom"
-                                        wire:model.debounce.500ms="form.banner_logo">
-                                    <label class="custom-file-label">
-                                        @if (isset($form['banner_logo']))
-                                            File Selected
-                                        @else
-                                            Choose file ( jpg | png | jpge ) - 1MB Max
-                                        @endif
-                                    </label>
-                                </div>
-                                @error('form.banner_logo')<p class="help-block input-error">
-                                        {{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6">
-                            <div class="form-group">
                                 <label class="form-label">Address<span class="input-required">*</span></label>
                                 <input type="text" id="autocomplete" class="form-control" placeholder="Address"
                                     autocomplete="off" wire:model.debounce.500ms="form.address">
                                 @error('form.address')<p class="help-block input-error">
                                         {{ $message }}</p>
                                 @enderror
+                                <input type="hidden" id="latitude" class="form-control" placeholder="Latitude"
+                                    readonly wire:model.debounce.500ms="form.latitude">
+                                <input type="hidden" id="longitude" class="form-control" placeholder="Longitude"
+                                    readonly wire:model.debounce.500ms="form.longitude">
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-6">
+                        {{-- <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Latitude</label>
                                 <input type="text" id="latitude" class="form-control" placeholder="Latitude" readonly
@@ -228,7 +217,7 @@
                                         {{ $message }}</p>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Country</label>
@@ -305,10 +294,10 @@
                         </div>
                         <div class="col-sm-6 col-md-6">
                             <div class="form-group">
-                                <label class="form-label">Headphone<span class="input-required">*</span></label>
-                                <input type="text" class="form-control" placeholder="Headphone"
-                                    wire:model.debounce.500ms="form.headphone">
-                                @error('form.headphone')<p class="help-block input-error">
+                                <label class="form-label">Handphone<span class="input-required">*</span></label>
+                                <input type="text" class="form-control" placeholder="Handphone"
+                                    wire:model.debounce.500ms="form.handphone">
+                                @error('form.handphone')<p class="help-block input-error">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -319,25 +308,6 @@
                                 <input type="email" class="form-control" placeholder="Email"
                                     wire:model.debounce.500ms="form.email">
                                 @error('form.email')<p class="help-block input-error">
-                                        {{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Profile Logo</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="example-file-input-custom"
-                                        wire:model.debounce.500ms="form.profile_logo">
-                                    <label class="custom-file-label">
-                                        @if (isset($form['profile_logo']))
-                                            File Selected
-                                        @else
-                                            Choose file ( jpg | png | jpge ) - 1MB Max
-                                        @endif
-                                    </label>
-                                </div>
-                                @error('form.profile_logo')<p class="help-block input-error">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -389,10 +359,53 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card-title font-weight-bold mt-5">Logos:</div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Banner Logo</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="example-file-input-custom"
+                                        wire:model.debounce.500ms="form.banner_logo">
+                                    <label class="custom-file-label">
+                                        @if (isset($form['banner_logo']))
+                                            File Selected
+                                        @else
+                                            Choose file ( jpg | png | jpge ) - 1MB Max
+                                        @endif
+                                    </label>
+                                </div>
+                                @error('form.banner_logo')<p class="help-block input-error">
+                                        {{ $message }}</p>
+                                @enderror
+                                <small class="form-text text-muted">Will be used on your site Login-Signup
+                                    pages</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Profile Picture</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="example-file-input-custom"
+                                        wire:model.debounce.500ms="form.profile_logo">
+                                    <label class="custom-file-label">
+                                        @if (isset($form['profile_logo']))
+                                            File Selected
+                                        @else
+                                            Choose file ( jpg | png | jpge ) - 1MB Max
+                                        @endif
+                                    </label>
+                                </div>
+                                @error('form.profile_logo')<p class="help-block input-error">
+                                        {{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer text-right">
                     <button type="submit" class="btn btn-lg btn-primary">Updated</button>
-                    <a href="#" class="btn btn-lg btn-danger">Cancle</a>
+                    {{-- <a href="#" class="btn btn-lg btn-danger">Cancel</a> --}}
                 </div>
             </form>
         </div>
