@@ -17,8 +17,13 @@
     <div class="app-sidebar__user">
         <div class="dropdown user-pro-body text-center">
             <div class="user-pic">
-                <img src="{{ URL::asset('assets/images/users/16.jpg') }}" alt="user-img"
-                    class="avatar-xl rounded-circle mb-1">
+                @if (Auth::user()->profile->profile_logo)
+                    <img src="{{ storage_path() }}/app/{{ Auth::user()->profile->profile_logo }}" alt="user-img"
+                        {{-- <img src="{{ storage_path('app/photos/9ye4NyXfHw8lfgb9fxvqsixrf1dg40yiYREAryz6.jpg') }}" --}} alt="user-img" class="avatar-xl rounded-circle mb-1">
+                @else
+                    <img src="{{ URL::asset('assets/images/users/16.jpg') }}" alt="user-img"
+                        class="avatar-xl rounded-circle mb-1">
+                @endif
             </div>
             <div class="user-info">
                 <h5 class=" mb-1 font-weight-bold">{{ Auth::user()->name }}</h5>

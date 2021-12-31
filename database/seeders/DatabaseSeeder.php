@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RoleSeeder::class,
-            CreateLanguages::class,
+            // CreateLanguages::class,
         ]);
     }
 }

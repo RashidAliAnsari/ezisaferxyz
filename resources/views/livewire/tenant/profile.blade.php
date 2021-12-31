@@ -156,10 +156,14 @@
                                 <label class="form-label">Business Type<span class="input-required">*</span></label>
                                 <select class="form-control nice-select  select2"
                                     wire:model.debounce.500ms="form.business_type">
+                                    <option value="">-- Select Business Type --</option>
                                     @foreach ($business_types as $type)
                                         <option value="{{ $type->name }}">{{ $type->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('form.business_type')<p class="help-block input-error">
+                                        {{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6">
@@ -306,7 +310,7 @@
                             <div class="form-group">
                                 <label class="form-label">Email<span class="input-required">*</span></label>
                                 <input type="email" class="form-control" placeholder="Email"
-                                    wire:model.debounce.500ms="form.email">
+                                    wire:model.debounce.500ms="form.email" readonly>
                                 @error('form.email')<p class="help-block input-error">
                                         {{ $message }}</p>
                                 @enderror
@@ -316,7 +320,7 @@
                             <div class="form-group">
                                 <label class="form-label">Website</label>
                                 <input type="text" class="form-control" placeholder="Website"
-                                    wire:model.debounce.500ms="form.website">
+                                    wire:model.debounce.500ms="form.website" readonly>
                                 @error('form.website')<p class="help-block input-error">
                                         {{ $message }}</p>
                                 @enderror
@@ -340,6 +344,7 @@
                                 <label class="form-label">Bank Name</label>
                                 <select class="form-control nice-select  select2"
                                     wire:model.debounce.500ms="form.bank_name">
+                                    <option value="">-- Select Bank Name --</option>
                                     @foreach ($banks as $bank)
                                         <option value="{{ $bank->bank_name }}">{{ $bank->bank_name }}</option>
                                     @endforeach
@@ -412,8 +417,8 @@
 
 
 @section('js')
-    {{-- <script type="text/javascript"
-        src="https://maps.google.com/maps/api/js?key=AIzaSyCi21EKu0cwQuB3BiGzUvwWmCXwJ6kt6gQ&libraries=places"></script> --}}
+    <script type="text/javascript"
+        src="https://maps.google.com/maps/api/js?key=AIzaSyCi21EKu0cwQuB3BiGzUvwWmCXwJ6kt6gQ&libraries=places"></script>
     <script>
         $(document).ready(function() {
             $("#latitudeArea").addClass("d-none");
