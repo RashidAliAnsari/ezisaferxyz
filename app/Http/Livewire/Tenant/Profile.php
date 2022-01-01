@@ -17,7 +17,7 @@ class Profile extends Component
     // public $updateMode = false;
     // public $agency_namee;
     // public $testUsers;
-    public $form = [], $subdomain, $no_of_users, $business_types, $banks;
+    public $form = [], $subdomain, $no_of_users, $business_types, $banks, $imagePath;
     
     protected $rules = [
         'form.agency_name' => 'required',
@@ -99,8 +99,12 @@ class Profile extends Component
             
         }
         
-        dd(storage_path());
+
+        $tenantId = \DB::connection()->getDatabaseName();
+        $this->imagePath = base_path('storage/'.$tenantId.'/app'.'/'.Auth::user()->profile->profile_logo);
+        // dd(storage_path());
         // dd(asset('app'));
+        // dd(public_path());
         // dd(tenant_asset('app'));
         // dd(asset('images'));
         // dd(storage_path('app/photos/xgXg75SdSx1y5CRGYcewQb5mA9tUDEU3Hdr4XrOd.jpg'));
@@ -137,6 +141,19 @@ class Profile extends Component
 
         if(isset($this->form['profile_logo'])){
             $this->form['profile_logo'] = $this->form['profile_logo']->store('photos');
+
+            
+
+            // dd($this->form['profile_logo']);
+            // $tenantId = \DB::connection()->getDatabaseName();
+            // $file = $this->form['profile_logo'] ;
+            // $fileName = $file->getClientOriginalName() ;
+            // $destinationPath = public_path(). '/' . 'tenancy/'. $tenantId .'/images' ;
+            // $file->move($destinationPath,$fileName);
+
+            // $this->form['profile_logo'] = $fileName;
+
+
         }
         
         ($this->agency->profile) ? $this->update() : $this->store() ;

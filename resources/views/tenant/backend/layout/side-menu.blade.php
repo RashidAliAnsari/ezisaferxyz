@@ -19,7 +19,8 @@
             <div class="user-pic">
                 @if (Auth::user()->profile && Auth::user()->profile->profile_logo)
                     <img src="{{ storage_path() }}/app/{{ Auth::user()->profile->profile_logo }}" alt="user-img"
-                        {{-- <img src="{{ storage_path('app/photos/9ye4NyXfHw8lfgb9fxvqsixrf1dg40yiYREAryz6.jpg') }}" --}} alt="user-img" class="avatar-xl rounded-circle mb-1">
+                        {{-- <img src="{{ public_path('tenancy/tenant128a6797-c2fa-4df3-a13b-c46663f9f6ae/images/qg2KCCpXax0kDoUBls50Rsxiw5wXJMiJkHZKo3Cg.jpg') }}" --}} alt="user-img" {{-- <img src="{{ storage_path('app/photos/9ye4NyXfHw8lfgb9fxvqsixrf1dg40yiYREAryz6.jpg') }}" --}} alt="user-img"
+                        class="avatar-xl rounded-circle mb-1">
                 @else
                     <img src="{{ URL::asset('assets/images/users/16.jpg') }}" alt="user-img"
                         class="avatar-xl rounded-circle mb-1">
