@@ -11,7 +11,6 @@
     <div class="page-header">
         <div class="page-leftheader">
             <h4 class="page-title">Analytics Dashboard</h4>
-            <button wire:click="like">click here</button>
         </div>
         <div class="page-rightheader ml-auto d-lg-flex d-none">
             <div class="ml-5 mb-0">

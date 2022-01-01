@@ -99,7 +99,11 @@ class Profile extends Component
             
         }
         
-        // dd(storage_path());
+        dd(storage_path());
+        // dd(asset('app'));
+        // dd(tenant_asset('app'));
+        // dd(asset('images'));
+        // dd(storage_path('app/photos/xgXg75SdSx1y5CRGYcewQb5mA9tUDEU3Hdr4XrOd.jpg'));
         // dd(storage_path() . '/' . Auth::user()->profile->profile_logo);
         $this->subdomain = strtok(request()->getHost(), '.');
         $this->no_of_users = User::where('agency_name', '')->count();
@@ -112,6 +116,7 @@ class Profile extends Component
         });
         
     }
+
     
     public function getAgencyProperty()
     {

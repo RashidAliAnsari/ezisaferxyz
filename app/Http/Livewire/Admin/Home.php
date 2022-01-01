@@ -8,7 +8,8 @@ class Home extends Component
 {
     public function mount()
     {
-        // dd('home mount');
+        // dd(tenant_asset('app'));
+        dd(storage_path());
     }
     public function like()
     {

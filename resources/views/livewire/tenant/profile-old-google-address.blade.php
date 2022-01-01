@@ -466,7 +466,6 @@
             var places = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
             google.maps.event.addListener(places, 'place_changed', function() {
                 var place = places.getPlace();
-                console.log(place);
                 var address = place.formatted_address;
                 @this.set('form.address', address);
                 var latitude = place.geometry.location.lat();
@@ -475,8 +474,6 @@
                 var geocoder = geocoder = new google.maps.Geocoder();
                 document.getElementById('latitude').value = latitude;
                 document.getElementById('longitude').value = longitude;
-                @this.set('form.latitude', latitude);
-                @this.set('form.longitude', longitude);
                 geocoder.geocode({
                     'latLng': latlng
                 }, function(results, status) {
@@ -501,40 +498,22 @@
                                 if (part.types.includes('country')) {
                                     //we found "country" inside the data.results[0].address_componenets[x].types array
                                     // $('#country').val(part.long_name); // country
-                                    // console.log('country '.part.long_name);
                                     @this.set('form.country', part.long_name);
                                 }
-                                // else {
-                                //     @this.set('form.country', '');
-                                // }
-
                                 if (part.types.includes(
                                         "administrative_area_level_1")) {
                                     // $('#state').val(part.long_name); // province
-                                    // console.log('state '.part.long_name);
                                     @this.set('form.state', part.long_name);
                                 }
-
                                 if (part.types.includes(
                                         "administrative_area_level_2")) {
                                     // $('#city').val(part.long_name); // city
-                                    // console.log('city '.part.long_name);
-                                    // alert('city exist');
                                     @this.set('form.city', part.long_name);
                                 }
-                                // else {
-                                //     // alert('city not exist');
-                                //     @this.set('form.city', '');
-                                // }
-
                                 if (part.types.includes("postal_code")) {
                                     // $('#zip').val(part.long_name); // region
-                                    // console.log('post_code '.part.long_name);
                                     @this.set('form.post_code', part.long_name);
                                 }
-                                // else {
-                                //     @this.set('form.post_code', '');
-                                // }
                             })
                         }
                     }
