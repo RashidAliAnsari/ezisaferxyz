@@ -100,8 +100,8 @@ class Profile extends Component
         }
         
 
-        $tenantId = \DB::connection()->getDatabaseName();
-        $this->imagePath = base_path('storage/'.$tenantId.'/app'.'/'.Auth::user()->profile->profile_logo);
+        // $tenantId = \DB::connection()->getDatabaseName();
+        // $this->imagePath = base_path('storage/'.$tenantId.'/app'.'/'.Auth::user()->profile->profile_logo);
         // dd(storage_path());
         // dd(asset('app'));
         // dd(public_path());
